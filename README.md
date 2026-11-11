@@ -2,6 +2,11 @@
 
 Before / after photo comparison slider for WordPress: create unlimited comparisons, display them with a shortcode or a Gutenberg block.
 
+<p align="center">
+  <img src="screenshots/apercu.png" alt="WP Then Now Slider — old photo restored and colorized, compared with a draggable handle" width="469">
+  <br><em>An old portrait compared with its AI-restored version / Un portrait ancien comparé à sa version restaurée par IA</em>
+</p>
+
 *Version française plus bas.*
 
 ## Features
