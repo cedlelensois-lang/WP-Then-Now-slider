@@ -1,133 +1,362 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Then Now Slider 2.0.0\n"
+"Project-Id-Version: WP Then Now Slider 2.1.0\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: wp-then-now-slider\n"
 
-msgid "Add New"
-msgstr "Ajouter"
+msgid "Images"
+msgstr "Images"
 
-msgid "After"
-msgstr "Après"
+msgid "Layout and display"
+msgstr "Disposition et affichage"
+
+msgid "Colors"
+msgstr "Couleurs"
+
+msgid "Filters"
+msgstr "Filtres"
+
+msgid "Watermark"
+msgstr "Filigrane"
+
+msgid "Badge"
+msgstr "Badge"
+
+msgid "Caption"
+msgstr "Légende"
+
+msgid "Top left"
+msgstr "En haut à gauche"
+
+msgid "Top center"
+msgstr "En haut au centre"
+
+msgid "Top right"
+msgstr "En haut à droite"
+
+msgid "Bottom left"
+msgstr "En bas à gauche"
+
+msgid "Bottom center"
+msgstr "En bas au centre"
+
+msgid "Bottom right"
+msgstr "En bas à droite"
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "Black & white"
+msgstr "Noir et blanc"
+
+msgid "Sepia"
+msgstr "Sépia"
+
+msgid "Vintage"
+msgstr "Vintage"
+
+msgid "Warm"
+msgstr "Chaud"
+
+msgid "Cool"
+msgstr "Froid"
+
+msgid "High contrast"
+msgstr "Contraste élevé"
+
+msgid "Vivid colors"
+msgstr "Couleurs vives"
+
+msgid "Blur"
+msgstr "Flou"
+
+msgid "Before image"
+msgstr "Image avant"
 
 msgid "After image"
 msgstr "Image après"
 
-msgid "After label"
-msgstr "Étiquette après"
-
-msgid "All comparisons"
-msgstr "Toutes les comparaisons"
+msgid "Show labels"
+msgstr "Afficher les étiquettes"
 
 msgid "Before"
 msgstr "Avant"
 
+msgid "Before label"
+msgstr "Étiquette avant"
+
+msgid "After"
+msgstr "Après"
+
+msgid "After label"
+msgstr "Étiquette après"
+
+msgid "Display mode"
+msgstr "Mode d’affichage"
+
+msgid "Drag the handle"
+msgstr "Glisser la poignée"
+
+msgid "Follow the mouse on hover"
+msgstr "Suivre la souris au survol"
+
+msgid "Click to switch images"
+msgstr "Cliquer pour changer d’image"
+
+msgid "Side by side"
+msgstr "Côte à côte"
+
+msgid "Orientation"
+msgstr "Orientation"
+
+msgid "Horizontal (left / right)"
+msgstr "Horizontale (gauche / droite)"
+
+msgid "Vertical (top / bottom)"
+msgstr "Verticale (haut / bas)"
+
+msgid "Reverse order"
+msgstr "Inverser l’ordre"
+
+msgid "Show the after image on the left (or at the top)."
+msgstr "Affiche l’image après à gauche (ou en haut)."
+
+msgid "Starting position (%)"
+msgstr "Position de départ (%)"
+
+msgid "Handle style"
+msgstr "Style de la poignée"
+
+msgid "Circle"
+msgstr "Rond"
+
+msgid "Square"
+msgstr "Carré"
+
+msgid "Arrows only"
+msgstr "Flèches seules"
+
+msgid "Line only"
+msgstr "Ligne seule"
+
+msgid "Handle visibility"
+msgstr "Visibilité de la poignée"
+
+msgid "Always visible"
+msgstr "Toujours visible"
+
+msgid "On mouse over"
+msgstr "Au survol de la souris"
+
+msgid "Hidden"
+msgstr "Masquée"
+
+msgid "When hidden, visitors can still drag anywhere on the image."
+msgstr "Masquée, la comparaison reste utilisable en glissant n’importe où sur l’image."
+
+msgid "Fullscreen button"
+msgstr "Bouton plein écran"
+
+msgid "Global"
+msgstr "Globales"
+
+msgid "Individual (specific to this comparison)"
+msgstr "Individuelles (propres à cette comparaison)"
+
+msgid "Handle color"
+msgstr "Couleur de la poignée"
+
+msgid "Empty = global color."
+msgstr "Vide = couleur globale."
+
+msgid "Selection color"
+msgstr "Couleur de sélection"
+
+msgid "Handle color when selected or being dragged. Empty = global color."
+msgstr "Couleur de la poignée sélectionnée ou en cours de glissement. Vide = couleur globale."
+
+msgid "Before image filter"
+msgstr "Filtre de l’image avant"
+
+msgid "After image filter"
+msgstr "Filtre de l’image après"
+
+msgid "Watermark image"
+msgstr "Image du filigrane"
+
+msgid "A logo with a transparent background (PNG or SVG) works best."
+msgstr "Un logo sur fond transparent (PNG ou SVG) donne le meilleur résultat."
+
+msgid "Watermark text"
+msgstr "Texte du filigrane"
+
+msgid "Used when no watermark image is set, e.g. © My studio."
+msgstr "Utilisé si aucune image de filigrane n’est choisie, ex. : © Mon studio."
+
+msgid "Watermark position"
+msgstr "Position du filigrane"
+
+msgid "Center"
+msgstr "Centre"
+
+msgid "Watermark opacity (%)"
+msgstr "Opacité du filigrane (%)"
+
+msgid "Badge text"
+msgstr "Texte du badge"
+
+msgid "E.g. New, -50%, 2024. Leave empty for no badge."
+msgstr "Ex. : Nouveau, -50 %, 2024. Laissez vide pour ne pas afficher de badge."
+
+msgid "Badge position"
+msgstr "Position du badge"
+
+msgid "Badge color"
+msgstr "Couleur du badge"
+
+msgid "Empty = selection color."
+msgstr "Vide = couleur de sélection."
+
+msgid "Basic HTML allowed (bold, italic, links)."
+msgstr "HTML simple autorisé (gras, italique, liens)."
+
+msgid "Caption position"
+msgstr "Position de la légende"
+
+msgid "Below the image"
+msgstr "Sous l’image"
+
+msgid "Over the image"
+msgstr "Sur l’image"
+
+msgid "Before / after comparisons"
+msgstr "Comparaisons avant / après"
+
+msgid "Comparison"
+msgstr "Comparaison"
+
 msgid "Before / After"
 msgstr "Avant / Après"
 
-msgid "Before / After > Settings"
-msgstr "Avant / Après > Réglages"
+msgid "All comparisons"
+msgstr "Toutes les comparaisons"
 
-msgid "Before / After settings"
-msgstr "Réglages Avant / Après"
+msgid "Add New"
+msgstr "Ajouter"
+
+msgid "New comparison"
+msgstr "Nouvelle comparaison"
+
+msgid "Edit comparison"
+msgstr "Modifier la comparaison"
+
+msgid "Search comparisons"
+msgstr "Rechercher"
+
+msgid "No comparisons found."
+msgstr "Aucune comparaison."
+
+msgid "No comparisons found in Trash."
+msgstr "Aucune comparaison dans la corbeille."
+
+msgid "WP Then Now Slider: please set two images (before and after)."
+msgstr "WP Then Now Slider : veuillez définir deux images (avant et après)."
+
+msgid "Click to switch between the two images"
+msgstr "Cliquez pour passer d’une image à l’autre"
 
 msgid "Before / after comparison slider"
 msgstr "Curseur de comparaison avant / après"
 
-msgid "Before / after comparisons"
-msgstr "Comparaisons avant / après"
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+msgid "Exit fullscreen"
+msgstr "Quitter le plein écran"
 
 #, php-format
 msgid "WP Then Now Slider: comparison #%d not found."
 msgstr "WP Then Now Slider : la comparaison n°%d est introuvable."
 
-msgid "WP Then Now Slider: please set two images (before and after)."
-msgstr "WP Then Now Slider : veuillez définir deux images (avant et après)."
+msgid "Images and settings"
+msgstr "Images et réglages"
 
-msgid "Before image"
-msgstr "Image avant"
+msgid "Shortcode"
+msgstr "Shortcode"
 
-msgid "Before label"
-msgstr "Étiquette avant"
+msgid "Preview"
+msgstr "Aperçu"
 
-msgid "Choose a saved comparison, or two images."
-msgstr "Choisissez une comparaison enregistrée, ou deux images."
+msgid "No image"
+msgstr "Aucune image"
 
 msgid "Choose an image"
 msgstr "Choisir une image"
 
-msgid "Choose both images, then save to see the preview."
-msgstr "Choisissez les deux images puis enregistrez pour voir l’aperçu."
+msgid "Remove"
+msgstr "Retirer"
 
-msgid "Colors"
-msgstr "Couleurs"
-
-msgid "Colors set in Before / After > Settings."
-msgstr "Couleurs définies dans Avant / Après > Réglages."
-
-msgid "Colors specific to this block. Empty = global color."
-msgstr "Couleurs propres à ce bloc. Vide = couleur globale."
-
-msgid "Comparison"
-msgstr "Comparaison"
-
-msgid "Comparisons"
-msgstr "Comparaisons"
-
-msgid "Copied!"
-msgstr "Copié !"
-
-msgid "Copy"
-msgstr "Copier"
-
-msgid "Display a before / after photo comparison."
-msgstr "Affichez une comparaison de photos avant / après."
-
-msgid "Edit comparison"
-msgstr "Modifier la comparaison"
-
-msgid "Edit global colors"
-msgstr "Modifier les couleurs globales"
-
-msgid "Edit this comparison"
-msgstr "Modifier cette comparaison"
-
-msgid "Empty = global color."
-msgstr "Vide = couleur globale."
-
-msgid "Follow the mouse on hover"
-msgstr "Suivre la souris au survol"
-
-msgid "Global"
-msgstr "Globales"
+msgid "Yes"
+msgstr "Oui"
 
 #, php-format
 msgid "Global colors can be changed in %s."
 msgstr "Les couleurs globales se modifient dans %s."
 
-msgid "Handle color"
-msgstr "Couleur de la poignée"
+msgid "Before / After > Settings"
+msgstr "Avant / Après > Réglages"
 
-msgid "Handle color when selected or being dragged. Empty = global color."
-msgstr "Couleur de la poignée sélectionnée ou en cours de glissement. Vide = couleur globale."
+msgid "Tip: use two images with the same dimensions for perfect alignment."
+msgstr "Astuce : utilisez deux images de mêmes dimensions pour un alignement parfait."
+
+msgid "Save the comparison to get its shortcode."
+msgstr "Enregistrez la comparaison pour obtenir son shortcode."
+
+msgid "Copy"
+msgstr "Copier"
+
+msgid "Paste this shortcode into a page or post, or use the “Before / After” block."
+msgstr "Collez ce shortcode dans une page ou un article, ou utilisez le bloc « Avant / Après »."
+
+msgid "Choose both images, then save to see the preview."
+msgstr "Choisissez les deux images puis enregistrez pour voir l’aperçu."
+
+msgid "Use this image"
+msgstr "Utiliser cette image"
+
+msgid "Copied!"
+msgstr "Copié !"
+
+msgid "Before / After settings"
+msgstr "Réglages Avant / Après"
+
+msgid "Settings"
+msgstr "Réglages"
+
+msgid "These colors apply to every comparison set to “Global colors”."
+msgstr "Ces couleurs s’appliquent à toutes les comparaisons réglées sur « Couleurs globales »."
 
 msgid "Handle color when selected or being dragged. Leave empty to use the theme color."
 msgstr "Couleur de la poignée sélectionnée ou en cours de glissement. Laissez vide pour utiliser la couleur du thème."
 
-msgid "Horizontal (left / right)"
-msgstr "Horizontale (gauche / droite)"
+msgid "Comparisons"
+msgstr "Comparaisons"
 
-msgid "Images"
-msgstr "Images"
+msgid "Replace"
+msgstr "Remplacer"
 
-msgid "Images and settings"
-msgstr "Images et réglages"
+msgid "Display a before / after photo comparison."
+msgstr "Affichez une comparaison de photos avant / après."
 
-msgid "Individual (specific to this comparison)"
-msgstr "Individuelles (propres à cette comparaison)"
+msgid "— Custom images —"
+msgstr "— Images personnalisées —"
+
+msgid "Saved comparison"
+msgstr "Comparaison enregistrée"
 
 msgid "Loading…"
 msgstr "Chargement…"
@@ -135,90 +364,14 @@ msgstr "Chargement…"
 msgid "Manage your comparisons in the “Before / After” admin menu."
 msgstr "Gérez vos comparaisons dans le menu « Avant / Après » de l’admin."
 
-msgid "New comparison"
-msgstr "Nouvelle comparaison"
+msgid "Edit this comparison"
+msgstr "Modifier cette comparaison"
 
-msgid "No comparisons found in Trash."
-msgstr "Aucune comparaison dans la corbeille."
+msgid "Edit global colors"
+msgstr "Modifier les couleurs globales"
 
-msgid "No comparisons found."
-msgstr "Aucune comparaison."
-
-msgid "No image"
-msgstr "Aucune image"
-
-msgid "Or custom images:"
-msgstr "Ou images personnalisées :"
-
-msgid "Orientation"
-msgstr "Orientation"
-
-msgid "Paste this shortcode into a page or post, or use the “Before / After” block."
-msgstr "Collez ce shortcode dans une page ou un article, ou utilisez le bloc « Avant / Après »."
-
-msgid "Position preview"
-msgstr "Aperçu de la position"
-
-msgid "Preview"
-msgstr "Aperçu"
-
-msgid "Remove"
-msgstr "Retirer"
-
-msgid "Replace “after”"
-msgstr "Changer « après »"
-
-msgid "Replace “before”"
-msgstr "Changer « avant »"
-
-msgid "Save the comparison to get its shortcode."
-msgstr "Enregistrez la comparaison pour obtenir son shortcode."
-
-msgid "Saved comparison"
-msgstr "Comparaison enregistrée"
-
-msgid "Search comparisons"
-msgstr "Rechercher"
-
-msgid "Selection color"
-msgstr "Couleur de sélection"
-
-msgid "Settings"
-msgstr "Réglages"
-
-msgid "Shortcode"
-msgstr "Shortcode"
-
-msgid "Show labels"
-msgstr "Afficher les étiquettes"
-
-msgid "Starting position"
-msgstr "Position de départ"
-
-#, php-format
-msgid "Starting position (%)"
-msgstr "Position de départ (%)"
-
-msgid "These colors apply to every comparison set to “Global colors”."
-msgstr "Ces couleurs s’appliquent à toutes les comparaisons réglées sur « Couleurs globales »."
-
-msgid "Tip: use two images with the same dimensions for perfect alignment."
-msgstr "Astuce : utilisez deux images de mêmes dimensions pour un alignement parfait."
-
-msgid "Use global colors"
-msgstr "Utiliser les couleurs globales"
-
-msgid "Use this image"
-msgstr "Utiliser cette image"
-
-msgid "Vertical (top / bottom)"
-msgstr "Verticale (haut / bas)"
-
-msgid "Yes"
-msgstr "Oui"
-
-msgid "— Custom images —"
-msgstr "— Images personnalisées —"
+msgid "Choose a saved comparison, or two images."
+msgstr "Choisissez une comparaison enregistrée, ou deux images."
 
 msgid "WP Then Now Slider"
 msgstr "WP Then Now Slider"

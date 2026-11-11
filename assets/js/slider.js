@@ -2,26 +2,105 @@
 (function () {
 	'use strict';
 
-	function initSlider(el) {
-		if (el.dataset.wptnReady) return;
-		el.dataset.wptnReady = '1';
+	/* ---------- Plein écran ---------- */
+	function initFullscreen(fig) {
+		var btn = fig.querySelector('.wptn-fs-btn');
+		if (!btn) return;
 
-		var vertical = el.dataset.orientation === 'vertical';
-		var hoverMode = el.dataset.hover === '1';
+		var request = fig.requestFullscreen || fig.webkitRequestFullscreen;
+		var native = false;
+
+		function nativeElement() {
+			return document.fullscreenElement || document.webkitFullscreenElement;
+		}
+
+		function setState(on, pseudo) {
+			fig.classList.toggle('wptn-fs', on);
+			document.documentElement.classList.toggle('wptn-fs-lock', on && pseudo);
+			btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+			btn.setAttribute('aria-label', on ? btn.dataset.exit : btn.dataset.enter);
+		}
+
+		btn.addEventListener('click', function (e) {
+			e.stopPropagation();
+			if (fig.classList.contains('wptn-fs')) {
+				if (native) {
+					(document.exitFullscreen || document.webkitExitFullscreen).call(document);
+				} else {
+					setState(false, true);
+				}
+				return;
+			}
+			if (request) {
+				try {
+					var p = request.call(fig);
+					if (p && p.catch) p.catch(function () { setState(true, true); });
+				} catch (err) {
+					setState(true, true);
+				}
+			} else {
+				// iPhone : pas d'API plein écran pour les éléments → plein écran simulé.
+				setState(true, true);
+			}
+		});
+
+		['fullscreenchange', 'webkitfullscreenchange'].forEach(function (ev) {
+			document.addEventListener(ev, function () {
+				if (nativeElement() === fig) {
+					native = true;
+					setState(true, false);
+				} else if (native) {
+					native = false;
+					setState(false, false);
+				}
+			});
+		});
+
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape' && !native && fig.classList.contains('wptn-fs')) {
+				setState(false, true);
+			}
+		});
+	}
+
+	/* ---------- Mode « clic pour basculer » ---------- */
+	function initToggle(el) {
+		function toggle() {
+			var on = !el.classList.contains('is-toggled');
+			el.classList.toggle('is-toggled', on);
+			el.setAttribute('aria-pressed', on ? 'true' : 'false');
+		}
+		el.addEventListener('click', function (e) {
+			if (e.target.closest('.wptn-fs-btn, a')) return;
+			toggle();
+		});
+		el.addEventListener('keydown', function (e) {
+			if (e.target !== el) return;
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				toggle();
+			}
+		});
+	}
+
+	/* ---------- Modes « glisser » et « survol » ---------- */
+	function initDrag(fig, el) {
+		var vertical = fig.dataset.orientation === 'vertical';
+		var hoverMode = fig.dataset.mode === 'hover';
 		var knob = el.querySelector('.wptn-knob');
-		var labelBefore = el.querySelector('.wptn-label-before');
-		var labelAfter = el.querySelector('.wptn-label-after');
-		var pos = parseFloat(getComputedStyle(el).getPropertyValue('--wptn-pos')) || 50;
+		var labelFirst = el.querySelector('.wptn-label-first');
+		var labelSecond = el.querySelector('.wptn-label-second');
+		var pos = parseFloat(getComputedStyle(fig).getPropertyValue('--wptn-pos')) || 50;
 		var dragging = false;
 		var frame = null;
 
 		function render() {
 			frame = null;
-			el.style.setProperty('--wptn-pos', pos + '%');
+			fig.style.setProperty('--wptn-pos', pos + '%');
 			if (knob) knob.setAttribute('aria-valuenow', Math.round(pos));
 			// Masque une étiquette quand le curseur passe dessus
-			if (labelBefore) labelBefore.classList.toggle('is-hidden', pos < 15);
-			if (labelAfter) labelAfter.classList.toggle('is-hidden', pos > 85);
+			if (labelFirst) labelFirst.classList.toggle('is-hidden', pos < 15);
+			if (labelSecond) labelSecond.classList.toggle('is-hidden', pos > 85);
 		}
 
 		function setPos(value) {
@@ -38,6 +117,7 @@
 
 		el.addEventListener('pointerdown', function (e) {
 			if (e.button !== undefined && e.button !== 0) return;
+			if (e.target.closest('.wptn-fs-btn, a')) return;
 			dragging = true;
 			el.classList.add('is-dragging');
 			try { el.setPointerCapture(e.pointerId); } catch (err) {}
@@ -59,9 +139,6 @@
 		}
 		el.addEventListener('pointerup', stop);
 		el.addEventListener('pointercancel', stop);
-
-		// Empêche le glisser-déposer natif des images
-		el.addEventListener('dragstart', function (e) { e.preventDefault(); });
 
 		if (knob) {
 			knob.addEventListener('keydown', function (e) {
@@ -91,8 +168,28 @@
 		render();
 	}
 
+	function initSlider(fig) {
+		if (fig.dataset.wptnReady) return;
+		fig.dataset.wptnReady = '1';
+
+		var el = fig.querySelector('.wptn-slider');
+		if (!el) return;
+
+		// Empêche le glisser-déposer natif des images
+		el.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+		initFullscreen(fig);
+
+		var mode = fig.dataset.mode || 'slider';
+		if (mode === 'click') {
+			initToggle(el);
+		} else if (mode === 'slider' || mode === 'hover') {
+			initDrag(fig, el);
+		}
+	}
+
 	function init(root) {
-		(root || document).querySelectorAll('.wptn-slider:not(.wptn-editor-preview)').forEach(initSlider);
+		(root || document).querySelectorAll('figure.wptn').forEach(initSlider);
 	}
 
 	window.WPThenNowSlider = { init: init };
