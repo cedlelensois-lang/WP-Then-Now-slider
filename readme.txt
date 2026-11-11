@@ -3,7 +3,7 @@ Tags: before after, image comparison, slider, compare images, photo
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,7 +80,18 @@ Set a color in Before / After > Settings for classic themes.
 = My images are not aligned =
 Use two images with the same dimensions.
 
+== Updates ==
+
+The plugin checks the GitHub Releases of cedlelensois-lang/WP-Then-Now-slider and shows
+updates in Dashboard > Updates and on the Plugins page, like any other plugin.
+Use "Check for updates" under the plugin name to check immediately.
+Optional (private repository or GitHub API limits), in wp-config.php:
+define( 'WPTN_GITHUB_TOKEN', 'your-token' );
+
 == Changelog ==
+
+= 2.2.0 =
+* Automatic updates from GitHub Releases (Update URI), "View details" window, "Check for updates" link.
 
 = 2.1.0 =
 * Display modes: drag, hover, click to switch, side by side.

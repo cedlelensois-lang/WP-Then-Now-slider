@@ -70,6 +70,18 @@ Before / after photo comparison slider for WordPress: create unlimited compariso
 With `id`, any other attribute overrides the saved setting.
 Content loaded with AJAX: `window.WPThenNowSlider.init(container)`.
 
+## Updates
+
+Once installed, the plugin checks this repository's **Releases** and WordPress offers the update like for any other plugin (Dashboard > Updates, Plugins page). A **Check for updates** link under the plugin name forces an immediate check.
+
+To publish an update: bump `Version:` in `wp-then-now-slider.php`, push, then publish a Release with the matching tag (e.g. `v2.2.0`). The *Release zip* workflow attaches `wp-then-now-slider.zip`, which WordPress downloads.
+
+Optional, in `wp-config.php` (private repository or GitHub API rate limits):
+
+```php
+define( 'WPTN_GITHUB_TOKEN', 'your-token' );
+```
+
 ## Upgrading from "Avant Après Slider" / "Before After Slider" 1.x
 
 Deactivate and delete the old plugin, then install this one. On activation, comparisons, global colors and blocks are migrated automatically. Old `[avant_apres]` / `[before_after]` shortcodes keep working.
@@ -104,4 +116,5 @@ Slider de comparaison de photos avant / après pour WordPress. Créez autant de 
 - Couleurs globales (**Avant / Après > Réglages**) ou propres à chaque comparaison
 - Couleur de sélection de la poignée = couleur du thème par défaut
 - Interface en français si WordPress est en français, sinon en anglais
+- Mises à jour automatiques depuis les Releases GitHub (lien « Vérifier les mises à jour » sous le nom du plugin)
 - Les anciens shortcodes `[avant_apres]` et `[before_after]` fonctionnent toujours

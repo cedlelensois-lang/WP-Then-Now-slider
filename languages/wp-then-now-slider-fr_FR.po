@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Then Now Slider 2.1.0\n"
+"Project-Id-Version: WP Then Now Slider 2.2.0\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -346,6 +346,23 @@ msgstr "Couleur de la poignée sélectionnée ou en cours de glissement. Laissez
 msgid "Comparisons"
 msgstr "Comparaisons"
 
+msgid "Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id=\"X\"] shortcode and a Gutenberg block."
+msgstr "Créez et gérez plusieurs comparaisons de photos avant / après avec un curseur glissant. Shortcode [then_now id=\"X\"] et bloc Gutenberg inclus."
+
+msgid "Check for updates"
+msgstr "Vérifier les mises à jour"
+
+#, php-format
+msgid "WP Then Now Slider: version %s is available. Use the “Update now” link below."
+msgstr "WP Then Now Slider : la version %s est disponible. Utilisez le lien « Mettre à jour » ci-dessous."
+
+#, php-format
+msgid "WP Then Now Slider: you are using the latest version (%s)."
+msgstr "WP Then Now Slider : vous utilisez la dernière version (%s)."
+
+msgid "WP Then Now Slider: unable to reach GitHub right now. Please try again later."
+msgstr "WP Then Now Slider : impossible de joindre GitHub pour le moment. Réessayez plus tard."
+
 msgid "Replace"
 msgstr "Remplacer"
 
@@ -375,7 +392,4 @@ msgstr "Choisissez une comparaison enregistrée, ou deux images."
 
 msgid "WP Then Now Slider"
 msgstr "WP Then Now Slider"
-
-msgid "Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id=\"X\"] shortcode and a Gutenberg block."
-msgstr "Créez et gérez plusieurs comparaisons de photos avant / après avec un curseur glissant. Shortcode [then_now id=\"X\"] et bloc Gutenberg inclus."
 

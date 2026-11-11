@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Then Now Slider 2.1.0\n"
+"Project-Id-Version: WP Then Now Slider 2.2.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "X-Domain: wp-then-now-slider\n"
 
@@ -342,6 +342,23 @@ msgstr ""
 msgid "Comparisons"
 msgstr ""
 
+msgid "Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id=\"X\"] shortcode and a Gutenberg block."
+msgstr ""
+
+msgid "Check for updates"
+msgstr ""
+
+#, php-format
+msgid "WP Then Now Slider: version %s is available. Use the “Update now” link below."
+msgstr ""
+
+#, php-format
+msgid "WP Then Now Slider: you are using the latest version (%s)."
+msgstr ""
+
+msgid "WP Then Now Slider: unable to reach GitHub right now. Please try again later."
+msgstr ""
+
 msgid "Replace"
 msgstr ""
 
@@ -370,8 +387,5 @@ msgid "Choose a saved comparison, or two images."
 msgstr ""
 
 msgid "WP Then Now Slider"
-msgstr ""
-
-msgid "Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id=\"X\"] shortcode and a Gutenberg block."
 msgstr ""
 

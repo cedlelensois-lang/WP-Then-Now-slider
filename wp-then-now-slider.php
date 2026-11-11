@@ -3,22 +3,26 @@
  * Plugin Name:       WP Then Now Slider
  * Plugin URI:        https://github.com/cedlelensois-lang/WP-Then-Now-slider
  * Description:       Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id="X"] shortcode and a Gutenberg block.
- * Version:           2.1.0
+ * Version:           2.2.0
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            Cédric
  * License:           GPL-2.0-or-later
  * Text Domain:       wp-then-now-slider
  * Domain Path:       /languages
+ * Update URI:        https://github.com/cedlelensois-lang/WP-Then-Now-slider
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPTN_VERSION', '2.1.0' );
+define( 'WPTN_VERSION', '2.2.0' );
+define( 'WPTN_FILE', __FILE__ );
 define( 'WPTN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPTN_CPT', 'wptn_comparison' );
+
+require_once __DIR__ . '/includes/updater.php';
 
 /* -------------------------------------------------------------------------
  * Schéma des réglages
