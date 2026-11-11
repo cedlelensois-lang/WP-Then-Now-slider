@@ -1,0 +1,228 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Then Now Slider 2.0.0\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Add New"
+msgstr "Ajouter"
+
+msgid "After"
+msgstr "Après"
+
+msgid "After image"
+msgstr "Image après"
+
+msgid "After label"
+msgstr "Étiquette après"
+
+msgid "All comparisons"
+msgstr "Toutes les comparaisons"
+
+msgid "Before"
+msgstr "Avant"
+
+msgid "Before / After"
+msgstr "Avant / Après"
+
+msgid "Before / After > Settings"
+msgstr "Avant / Après > Réglages"
+
+msgid "Before / After settings"
+msgstr "Réglages Avant / Après"
+
+msgid "Before / after comparison slider"
+msgstr "Curseur de comparaison avant / après"
+
+msgid "Before / after comparisons"
+msgstr "Comparaisons avant / après"
+
+#, php-format
+msgid "WP Then Now Slider: comparison #%d not found."
+msgstr "WP Then Now Slider : la comparaison n°%d est introuvable."
+
+msgid "WP Then Now Slider: please set two images (before and after)."
+msgstr "WP Then Now Slider : veuillez définir deux images (avant et après)."
+
+msgid "Before image"
+msgstr "Image avant"
+
+msgid "Before label"
+msgstr "Étiquette avant"
+
+msgid "Choose a saved comparison, or two images."
+msgstr "Choisissez une comparaison enregistrée, ou deux images."
+
+msgid "Choose an image"
+msgstr "Choisir une image"
+
+msgid "Choose both images, then save to see the preview."
+msgstr "Choisissez les deux images puis enregistrez pour voir l’aperçu."
+
+msgid "Colors"
+msgstr "Couleurs"
+
+msgid "Colors set in Before / After > Settings."
+msgstr "Couleurs définies dans Avant / Après > Réglages."
+
+msgid "Colors specific to this block. Empty = global color."
+msgstr "Couleurs propres à ce bloc. Vide = couleur globale."
+
+msgid "Comparison"
+msgstr "Comparaison"
+
+msgid "Comparisons"
+msgstr "Comparaisons"
+
+msgid "Copied!"
+msgstr "Copié !"
+
+msgid "Copy"
+msgstr "Copier"
+
+msgid "Display a before / after photo comparison."
+msgstr "Affichez une comparaison de photos avant / après."
+
+msgid "Edit comparison"
+msgstr "Modifier la comparaison"
+
+msgid "Edit global colors"
+msgstr "Modifier les couleurs globales"
+
+msgid "Edit this comparison"
+msgstr "Modifier cette comparaison"
+
+msgid "Empty = global color."
+msgstr "Vide = couleur globale."
+
+msgid "Follow the mouse on hover"
+msgstr "Suivre la souris au survol"
+
+msgid "Global"
+msgstr "Globales"
+
+#, php-format
+msgid "Global colors can be changed in %s."
+msgstr "Les couleurs globales se modifient dans %s."
+
+msgid "Handle color"
+msgstr "Couleur de la poignée"
+
+msgid "Handle color when selected or being dragged. Empty = global color."
+msgstr "Couleur de la poignée sélectionnée ou en cours de glissement. Vide = couleur globale."
+
+msgid "Handle color when selected or being dragged. Leave empty to use the theme color."
+msgstr "Couleur de la poignée sélectionnée ou en cours de glissement. Laissez vide pour utiliser la couleur du thème."
+
+msgid "Horizontal (left / right)"
+msgstr "Horizontale (gauche / droite)"
+
+msgid "Images"
+msgstr "Images"
+
+msgid "Images and settings"
+msgstr "Images et réglages"
+
+msgid "Individual (specific to this comparison)"
+msgstr "Individuelles (propres à cette comparaison)"
+
+msgid "Loading…"
+msgstr "Chargement…"
+
+msgid "Manage your comparisons in the “Before / After” admin menu."
+msgstr "Gérez vos comparaisons dans le menu « Avant / Après » de l’admin."
+
+msgid "New comparison"
+msgstr "Nouvelle comparaison"
+
+msgid "No comparisons found in Trash."
+msgstr "Aucune comparaison dans la corbeille."
+
+msgid "No comparisons found."
+msgstr "Aucune comparaison."
+
+msgid "No image"
+msgstr "Aucune image"
+
+msgid "Or custom images:"
+msgstr "Ou images personnalisées :"
+
+msgid "Orientation"
+msgstr "Orientation"
+
+msgid "Paste this shortcode into a page or post, or use the “Before / After” block."
+msgstr "Collez ce shortcode dans une page ou un article, ou utilisez le bloc « Avant / Après »."
+
+msgid "Position preview"
+msgstr "Aperçu de la position"
+
+msgid "Preview"
+msgstr "Aperçu"
+
+msgid "Remove"
+msgstr "Retirer"
+
+msgid "Replace “after”"
+msgstr "Changer « après »"
+
+msgid "Replace “before”"
+msgstr "Changer « avant »"
+
+msgid "Save the comparison to get its shortcode."
+msgstr "Enregistrez la comparaison pour obtenir son shortcode."
+
+msgid "Saved comparison"
+msgstr "Comparaison enregistrée"
+
+msgid "Search comparisons"
+msgstr "Rechercher"
+
+msgid "Selection color"
+msgstr "Couleur de sélection"
+
+msgid "Settings"
+msgstr "Réglages"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Show labels"
+msgstr "Afficher les étiquettes"
+
+msgid "Starting position"
+msgstr "Position de départ"
+
+#, php-format
+msgid "Starting position (%)"
+msgstr "Position de départ (%)"
+
+msgid "These colors apply to every comparison set to “Global colors”."
+msgstr "Ces couleurs s’appliquent à toutes les comparaisons réglées sur « Couleurs globales »."
+
+msgid "Tip: use two images with the same dimensions for perfect alignment."
+msgstr "Astuce : utilisez deux images de mêmes dimensions pour un alignement parfait."
+
+msgid "Use global colors"
+msgstr "Utiliser les couleurs globales"
+
+msgid "Use this image"
+msgstr "Utiliser cette image"
+
+msgid "Vertical (top / bottom)"
+msgstr "Verticale (haut / bas)"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "— Custom images —"
+msgstr "— Images personnalisées —"
+
+msgid "WP Then Now Slider"
+msgstr "WP Then Now Slider"
+
+msgid "Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id=\"X\"] shortcode and a Gutenberg block."
+msgstr "Créez et gérez plusieurs comparaisons de photos avant / après avec un curseur glissant. Shortcode [then_now id=\"X\"] et bloc Gutenberg inclus."
+

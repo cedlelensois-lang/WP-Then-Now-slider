@@ -1,0 +1,221 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Then Now Slider 2.0.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Add New"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "After image"
+msgstr ""
+
+msgid "After label"
+msgstr ""
+
+msgid "All comparisons"
+msgstr ""
+
+msgid "Before"
+msgstr ""
+
+msgid "Before / After"
+msgstr ""
+
+msgid "Before / After > Settings"
+msgstr ""
+
+msgid "Before / After settings"
+msgstr ""
+
+msgid "Before / after comparison slider"
+msgstr ""
+
+msgid "Before / after comparisons"
+msgstr ""
+
+msgid "WP Then Now Slider: comparison #%d not found."
+msgstr ""
+
+msgid "WP Then Now Slider: please set two images (before and after)."
+msgstr ""
+
+msgid "Before image"
+msgstr ""
+
+msgid "Before label"
+msgstr ""
+
+msgid "Choose a saved comparison, or two images."
+msgstr ""
+
+msgid "Choose an image"
+msgstr ""
+
+msgid "Choose both images, then save to see the preview."
+msgstr ""
+
+msgid "Colors"
+msgstr ""
+
+msgid "Colors set in Before / After > Settings."
+msgstr ""
+
+msgid "Colors specific to this block. Empty = global color."
+msgstr ""
+
+msgid "Comparison"
+msgstr ""
+
+msgid "Comparisons"
+msgstr ""
+
+msgid "Copied!"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Display a before / after photo comparison."
+msgstr ""
+
+msgid "Edit comparison"
+msgstr ""
+
+msgid "Edit global colors"
+msgstr ""
+
+msgid "Edit this comparison"
+msgstr ""
+
+msgid "Empty = global color."
+msgstr ""
+
+msgid "Follow the mouse on hover"
+msgstr ""
+
+msgid "Global"
+msgstr ""
+
+msgid "Global colors can be changed in %s."
+msgstr ""
+
+msgid "Handle color"
+msgstr ""
+
+msgid "Handle color when selected or being dragged. Empty = global color."
+msgstr ""
+
+msgid "Handle color when selected or being dragged. Leave empty to use the theme color."
+msgstr ""
+
+msgid "Horizontal (left / right)"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Images and settings"
+msgstr ""
+
+msgid "Individual (specific to this comparison)"
+msgstr ""
+
+msgid "Loading…"
+msgstr ""
+
+msgid "Manage your comparisons in the “Before / After” admin menu."
+msgstr ""
+
+msgid "New comparison"
+msgstr ""
+
+msgid "No comparisons found in Trash."
+msgstr ""
+
+msgid "No comparisons found."
+msgstr ""
+
+msgid "No image"
+msgstr ""
+
+msgid "Or custom images:"
+msgstr ""
+
+msgid "Orientation"
+msgstr ""
+
+msgid "Paste this shortcode into a page or post, or use the “Before / After” block."
+msgstr ""
+
+msgid "Position preview"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Replace “after”"
+msgstr ""
+
+msgid "Replace “before”"
+msgstr ""
+
+msgid "Save the comparison to get its shortcode."
+msgstr ""
+
+msgid "Saved comparison"
+msgstr ""
+
+msgid "Search comparisons"
+msgstr ""
+
+msgid "Selection color"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Shortcode"
+msgstr ""
+
+msgid "Show labels"
+msgstr ""
+
+msgid "Starting position"
+msgstr ""
+
+msgid "Starting position (%)"
+msgstr ""
+
+msgid "These colors apply to every comparison set to “Global colors”."
+msgstr ""
+
+msgid "Tip: use two images with the same dimensions for perfect alignment."
+msgstr ""
+
+msgid "Use global colors"
+msgstr ""
+
+msgid "Use this image"
+msgstr ""
+
+msgid "Vertical (top / bottom)"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "— Custom images —"
+msgstr ""
+
+msgid "WP Then Now Slider"
+msgstr ""
+
+msgid "Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id=\"X\"] shortcode and a Gutenberg block."
+msgstr ""
+

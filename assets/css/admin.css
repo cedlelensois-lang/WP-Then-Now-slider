@@ -1,0 +1,59 @@
+/* WP Then Now Slider – admin */
+.wptn-media-row {
+	display: flex;
+	gap: 24px;
+	flex-wrap: wrap;
+	margin: 8px 0 12px;
+}
+.wptn-media-field {
+	flex: 1 1 260px;
+	max-width: 360px;
+}
+.wptn-media-preview {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 160px;
+	margin: 8px 0;
+	background: #f6f7f7;
+	border: 1px dashed #c3c4c7;
+	border-radius: 4px;
+	overflow: hidden;
+}
+.wptn-media-preview img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+.wptn-media-empty {
+	color: #787c82;
+}
+.wptn-media-remove {
+	margin-left: 8px !important;
+	color: #b32d2e !important;
+}
+.wptn-shortcode-input {
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	width: 100%;
+	max-width: 240px;
+}
+.column-wptn_thumb {
+	width: 130px;
+}
+.column-wptn_shortcode {
+	width: 240px;
+}
+.wptn-thumbs {
+	display: flex;
+	gap: 4px;
+}
+.wptn-thumbs img,
+.wptn-thumb-empty {
+	display: block;
+	width: 56px;
+	height: 56px;
+	object-fit: cover;
+	border-radius: 3px;
+	background: #f0f0f1;
+}
