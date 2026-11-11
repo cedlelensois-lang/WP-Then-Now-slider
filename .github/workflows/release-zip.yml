@@ -1,0 +1,42 @@
+# Fabrique wp-then-now-slider.zip et le joint à la Release.
+# - Automatique : à chaque Release publiée.
+# - Manuel : onglet Actions > "Release zip" > Run workflow, en indiquant le tag (ex. v2.0.0).
+name: Release zip
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag de la Release (ex. v2.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Vérifier la version du plugin
+        run: |
+          VERSION=$(grep -m1 -E '^\s*\*\s*Version:' wp-then-now-slider.php | awk '{print $NF}')
+          echo "Version du plugin : $VERSION — tag : $TAG"
+          if [ "v$VERSION" != "$TAG" ] && [ "$VERSION" != "$TAG" ]; then
+            echo "::warning::Le tag ($TAG) ne correspond pas à la version du plugin ($VERSION)."
+          fi
+
+      - name: Fabriquer le zip
+        run: git archive --format=zip --prefix=wp-then-now-slider/ -o wp-then-now-slider.zip HEAD
+
+      - name: Joindre le zip à la Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" wp-then-now-slider.zip --clobber --repo "$GITHUB_REPOSITORY"
