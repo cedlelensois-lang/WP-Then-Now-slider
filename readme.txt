@@ -1,9 +1,9 @@
 === WP Then Now Slider ===
 Tags: before after, image comparison, slider, compare images, photo
-Requires at least: 5.8
-Tested up to: 6.7
-Requires PHP: 7.2
-Stable tag: 2.2.0
+Requires at least: 7.0
+Tested up to: 7.1
+Requires PHP: 8.1
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,7 +26,8 @@ shortcode or the Gutenberg block.
 * Custom labels that fade out when the handle passes over them
 * Global or per-comparison colors (handle + selection color; default = theme color)
 * Mouse, touch and keyboard (arrows, Shift+arrows, Home/End), accessible slider role
-* No jQuery on the front end, assets only loaded where needed
+* No jQuery on the front end, deferred script, assets only loaded where needed
+* Responsive images (srcset) and lazy loading handled by WordPress
 * English and French included, translation ready (.pot)
 
 == Installation ==
@@ -80,6 +81,14 @@ Set a color in Before / After > Settings for classic themes.
 = My images are not aligned =
 Use two images with the same dimensions.
 
+= What happens to my comparisons if I delete the plugin? =
+Uninstalling removes the plugin settings and cache. Saved comparisons are kept, so nothing
+is lost if you reinstall. To remove them too, move them to the Trash before uninstalling.
+
+= Who can see a draft or private comparison? =
+Only users allowed to read it. In a page, a shortcode or block pointing to an unpublished
+comparison shows nothing to visitors.
+
 == Updates ==
 
 The plugin checks the GitHub Releases of cedlelensois-lang/WP-Then-Now-slider and shows
@@ -88,7 +97,34 @@ Use "Check for updates" under the plugin name to check immediately.
 Optional (private repository or GitHub API limits), in wp-config.php:
 define( 'WPTN_GITHUB_TOKEN', 'your-token' );
 
+== External services ==
+
+To check for updates, the plugin requests https://api.github.com/repos/cedlelensois-lang/WP-Then-Now-slider/releases/latest
+about every 6 hours from the admin area, and downloads the release zip from github.com when you
+update. No data about your site or its visitors is sent (only a generic User-Agent with the plugin version).
+GitHub terms: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+GitHub privacy statement: https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement
+
+== Upgrade Notice ==
+
+= 2.3.0 =
+Requires WordPress 7.0 and PHP 8.1. Security hardening and WordPress 7.1 compatibility (block API v3).
+
 == Changelog ==
+
+= 2.3.0 =
+* Requires WordPress 7.0+ and PHP 8.1+; tested up to WordPress 7.1.
+* Block registered with block.json and block API version 3 (iframed editor of WordPress 7.1).
+* Security: unpublished comparisons are only displayed to users allowed to read them.
+* Security: comparisons are no longer exposed through the public REST API.
+* Security: update check validates the download URL and version, sends no site data, and is limited to administrators.
+* Security: invalid form values (arrays) are rejected instead of causing a PHP error.
+* Legacy data migration limited to plugin activation or administrators; targeted cache cleaning.
+* New uninstall routine (settings and cache).
+* Responsive images (srcset/sizes) and smart lazy loading through WordPress; deferred front-end script.
+* Accessibility: aria-valuetext on the handle, reduced motion respected.
+* Editor components use the WordPress 7 sizes; no inline JavaScript in admin screens.
+* French translations: non-breaking spaces, block title and description translated.
 
 = 2.2.0 =
 * Automatic updates from GitHub Releases (Update URI), "View details" window, "Check for updates" link.

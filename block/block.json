@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wptn/slider",
+	"title": "Before / After",
+	"category": "media",
+	"icon": "image-flip-horizontal",
+	"description": "Display a before / after photo comparison.",
+	"keywords": [ "avant", "après", "before", "after", "then", "now", "comparaison", "comparison", "slider" ],
+	"textdomain": "wp-then-now-slider",
+	"supports": {
+		"align": [ "wide", "full" ],
+		"html": false
+	},
+	"editorScript": "wptn-block",
+	"editorStyle": "wptn-style"
+}

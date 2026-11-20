@@ -3,9 +3,9 @@
  * Plugin Name:       WP Then Now Slider
  * Plugin URI:        https://github.com/cedlelensois-lang/WP-Then-Now-slider
  * Description:       Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id="X"] shortcode and a Gutenberg block.
- * Version:           2.2.0
- * Requires at least: 5.8
- * Requires PHP:      7.2
+ * Version:           2.3.0
+ * Requires at least: 7.0
+ * Requires PHP:      8.1
  * Author:            Cédric
  * License:           GPL-2.0-or-later
  * Text Domain:       wp-then-now-slider
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPTN_VERSION', '2.2.0' );
+define( 'WPTN_VERSION', '2.3.0' );
 define( 'WPTN_FILE', __FILE__ );
 define( 'WPTN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPTN_CPT', 'wptn_comparison' );
@@ -204,6 +204,10 @@ function wptn_defaults() {
  * @return mixed
  */
 function wptn_sanitize_value( $f, $value, $allow_url = false ) {
+	// Un tableau (champ de formulaire falsifié) n'est jamais une valeur valide.
+	if ( is_array( $value ) || is_object( $value ) ) {
+		return ( 'bool' === $f['type'] ) ? false : $f['default'];
+	}
 	switch ( $f['type'] ) {
 		case 'media':
 			if ( is_numeric( $value ) ) {
@@ -251,11 +255,11 @@ function wptn_sanitize_settings( $in, $allow_url = false, $only_given = false ) 
 		$out[ $key ] = wptn_sanitize_value( $f, $in[ $key ], $allow_url );
 	}
 	foreach ( array( 'before_alt', 'after_alt' ) as $key ) {
-		if ( isset( $in[ $key ] ) ) {
-			$out[ $key ] = sanitize_text_field( $in[ $key ] );
+		if ( isset( $in[ $key ] ) && is_scalar( $in[ $key ] ) ) {
+			$out[ $key ] = sanitize_text_field( (string) $in[ $key ] );
 		}
 	}
-	if ( isset( $in['class'] ) ) {
+	if ( isset( $in['class'] ) && is_scalar( $in['class'] ) ) {
 		$out['class'] = implode( ' ', array_map( 'sanitize_html_class', preg_split( '/\s+/', (string) $in['class'] ) ) );
 	}
 	return $out;
@@ -324,7 +328,7 @@ function wptn_register() {
 			'public'          => false,
 			'show_ui'         => true,
 			'show_in_menu'    => true,
-			'show_in_rest'    => true, // Nécessaire pour la liste dans le bloc.
+			'show_in_rest'    => false, // Liste transmise au bloc par wptn_block_editor_data().
 			'menu_icon'       => 'dashicons-image-flip-horizontal',
 			'menu_position'   => 25,
 			'supports'        => array( 'title' ),
@@ -333,11 +337,20 @@ function wptn_register() {
 	);
 
 	wp_register_style( 'wptn-style', WPTN_URL . 'assets/css/style.css', array(), WPTN_VERSION );
-	wp_register_script( 'wptn-script', WPTN_URL . 'assets/js/slider.js', array(), WPTN_VERSION, true );
+	wp_register_script(
+		'wptn-script',
+		WPTN_URL . 'assets/js/slider.js',
+		array(),
+		WPTN_VERSION,
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
 	wp_register_script(
 		'wptn-block',
 		WPTN_URL . 'assets/js/block.js',
-		array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-i18n', 'wp-data', 'wp-server-side-render' ),
+		array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-i18n', 'wp-data', 'wp-core-data', 'wp-server-side-render' ),
 		WPTN_VERSION,
 		true
 	);
@@ -370,14 +383,12 @@ function wptn_register() {
 		$attributes[ $key ] = array( 'type' => $type );
 	}
 
+	// Métadonnées dans block/block.json (API v3, éditeur en iframe) ; attributs générés depuis le schéma.
 	register_block_type(
-		'wptn/slider',
+		__DIR__ . '/block',
 		array(
-			'editor_script'   => 'wptn-block',
-			'editor_style'    => 'wptn-style',
 			'render_callback' => 'wptn_render_block',
 			'attributes'      => $attributes,
-			'supports'        => array( 'align' => array( 'wide', 'full' ) ),
 		)
 	);
 
@@ -441,6 +452,7 @@ function wptn_get_image( $value, $alt = '' ) {
 		}
 		$meta_alt = get_post_meta( (int) $value, '_wp_attachment_image_alt', true );
 		return array(
+			'id'     => (int) $value,
 			'url'    => $src[0],
 			'width'  => (int) $src[1],
 			'height' => (int) $src[2],
@@ -449,6 +461,7 @@ function wptn_get_image( $value, $alt = '' ) {
 	}
 	if ( is_string( $value ) && '' !== trim( $value ) ) {
 		return array(
+			'id'     => 0,
 			'url'    => $value,
 			'width'  => 0,
 			'height' => 0,
@@ -470,8 +483,13 @@ function wptn_img_tag( $image, $class ) {
 	if ( $image['width'] && $image['height'] ) {
 		$dims = sprintf( ' width="%d" height="%d"', $image['width'], $image['height'] );
 	}
+	// La classe wp-image-ID permet à WordPress d'ajouter srcset/sizes et le chargement
+	// optimisé (lazy sauf pour les images en haut de page) via wp_filter_content_tags().
+	if ( ! empty( $image['id'] ) ) {
+		$class .= ' wp-image-' . (int) $image['id'];
+	}
 	return sprintf(
-		'<img class="%s" src="%s" alt="%s"%s loading="lazy" decoding="async" draggable="false" />',
+		'<img class="%s" src="%s" alt="%s"%s draggable="false" />',
 		esc_attr( $class ),
 		esc_url( $image['url'] ),
 		esc_attr( $image['alt'] ),
@@ -589,7 +607,7 @@ function wptn_render( $args ) {
 					<span class="wptn-knob" role="slider" tabindex="0"
 						aria-label="<?php esc_attr_e( 'Before / after comparison slider', 'wp-then-now-slider' ); ?>"
 						aria-orientation="<?php echo esc_attr( $orientation ); ?>"
-						aria-valuemin="0" aria-valuemax="100" aria-valuenow="<?php echo esc_attr( $s['start'] ); ?>">
+						aria-valuemin="0" aria-valuemax="100" aria-valuenow="<?php echo esc_attr( $s['start'] ); ?>" aria-valuetext="<?php echo esc_attr( $s['start'] . ' %' ); ?>">
 						<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
 							<path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
@@ -628,7 +646,9 @@ function wptn_render( $args ) {
  */
 function wptn_render_comparison( $id, $overrides = array() ) {
 	$post = get_post( $id );
-	if ( ! $post || WPTN_CPT !== $post->post_type || 'trash' === $post->post_status ) {
+	$readable = $post && WPTN_CPT === $post->post_type
+		&& ( 'publish' === $post->post_status || ( 'trash' !== $post->post_status && current_user_can( 'read_post', $post->ID ) ) );
+	if ( ! $readable ) {
 		if ( current_user_can( 'edit_posts' ) ) {
 			/* translators: %d: ID */
 			return '<p class="wptn-error">' . esc_html( sprintf( __( 'WP Then Now Slider: comparison #%d not found.', 'wp-then-now-slider' ), $id ) ) . '</p>';
@@ -787,7 +807,7 @@ function wptn_field_row( $key, $f, $value ) {
 					break;
 				case 'range':
 					printf(
-						'<input type="range" id="%1$s" name="%2$s" min="%3$d" max="%4$d" value="%5$d" oninput="this.nextElementSibling.textContent=this.value" /> <output>%5$d</output>',
+						'<input type="range" id="%1$s" name="%2$s" min="%3$d" max="%4$d" value="%5$d" class="wptn-range" /> <output>%5$d</output>',
 						esc_attr( $id ),
 						esc_attr( $name ),
 						(int) $f['min'],
@@ -806,7 +826,7 @@ function wptn_field_row( $key, $f, $value ) {
 				printf(
 					'<p class="description">%s</p>',
 					sprintf(
-						/* translators: %s: lien vers les réglages */
+						/* translators: %s: link to the Settings page */
 						esc_html__( 'Global colors can be changed in %s.', 'wp-then-now-slider' ),
 						'<a href="' . esc_url( admin_url( 'edit.php?post_type=' . WPTN_CPT . '&page=wptn-settings' ) ) . '">' . esc_html__( 'Before / After > Settings', 'wp-then-now-slider' ) . '</a>'
 					)
@@ -855,7 +875,7 @@ function wptn_meta_box_shortcode( $post ) {
 	}
 	$code = '[then_now id="' . $post->ID . '"]';
 	?>
-	<input type="text" class="widefat wptn-shortcode-input" readonly value="<?php echo esc_attr( $code ); ?>" onclick="this.select()" />
+	<input type="text" class="widefat wptn-shortcode-input" readonly value="<?php echo esc_attr( $code ); ?>" />
 	<p><button type="button" class="button wptn-copy" data-code="<?php echo esc_attr( $code ); ?>"><?php esc_html_e( 'Copy', 'wp-then-now-slider' ); ?></button></p>
 	<p class="description"><?php esc_html_e( 'Paste this shortcode into a page or post, or use the “Before / After” block.', 'wp-then-now-slider' ); ?></p>
 	<?php
@@ -1007,15 +1027,35 @@ function wptn_block_editor_data() {
 	foreach ( wptn_schema() as $key => $f ) {
 		$schema[ $key ] = array_intersect_key( $f, array_flip( array( 'type', 'default', 'section', 'label', 'help', 'options', 'min', 'max', 'show_if' ) ) );
 	}
-	wp_localize_script(
-		'wptn-block',
-		'wptnBlock',
-		array(
-			'schema'      => $schema,
-			'sections'    => wptn_sections(),
-			'settingsUrl' => current_user_can( 'manage_options' ) ? admin_url( 'edit.php?post_type=' . WPTN_CPT . '&page=wptn-settings' ) : '',
-		)
+	$comparisons = array();
+	if ( current_user_can( 'edit_posts' ) ) {
+		$posts = get_posts(
+			array(
+				'post_type'      => WPTN_CPT,
+				'post_status'    => array( 'publish', 'draft', 'private', 'pending', 'future' ),
+				'posts_per_page' => 500,
+				'orderby'        => 'title',
+				'order'          => 'ASC',
+				'no_found_rows'  => true,
+			)
+		);
+		foreach ( $posts as $p ) {
+			if ( current_user_can( 'read_post', $p->ID ) ) {
+				$comparisons[] = array(
+					'id'    => $p->ID,
+					'title' => '' !== $p->post_title ? $p->post_title : '#' . $p->ID,
+				);
+			}
+		}
+	}
+	$data = array(
+		'schema'      => $schema,
+		'sections'    => wptn_sections(),
+		'comparisons' => $comparisons,
+		'editUrl'     => admin_url( 'post.php?action=edit&post=' ),
+		'settingsUrl' => current_user_can( 'manage_options' ) ? admin_url( 'edit.php?post_type=' . WPTN_CPT . '&page=wptn-settings' ) : '',
 	);
+	wp_add_inline_script( 'wptn-block', 'window.wptnBlock = ' . wp_json_encode( $data ) . ';', 'before' );
 }
 add_action( 'enqueue_block_editor_assets', 'wptn_block_editor_data' );
 
@@ -1041,7 +1081,7 @@ add_filter( 'manage_' . WPTN_CPT . '_posts_columns', 'wptn_columns' );
 function wptn_column_content( $column, $post_id ) {
 	if ( 'wptn_shortcode' === $column ) {
 		printf(
-			'<input type="text" readonly class="wptn-shortcode-input" value="%s" onclick="this.select()" />',
+			'<input type="text" readonly class="wptn-shortcode-input" value="%s" />',
 			esc_attr( '[then_now id="' . $post_id . '"]' )
 		);
 	}
@@ -1080,9 +1120,13 @@ function wptn_migrate_legacy() {
 	if ( get_option( 'wptn_migrated' ) ) {
 		return;
 	}
+	if ( ! doing_action( 'activate_' . plugin_basename( WPTN_FILE ) ) && ! current_user_can( 'activate_plugins' ) ) {
+		return;
+	}
 	global $wpdb;
 
 	// Comparaisons et leurs réglages.
+	$ids = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE post_type = %s", 'aas_comparison' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 	$wpdb->update( $wpdb->posts, array( 'post_type' => WPTN_CPT ), array( 'post_type' => 'aas_comparison' ) );
 	$wpdb->update( $wpdb->postmeta, array( 'meta_key' => '_wptn_settings' ), array( 'meta_key' => '_aas_settings' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery
 
@@ -1093,11 +1137,14 @@ function wptn_migrate_legacy() {
 	}
 
 	// Blocs déjà insérés dans les pages.
+	$ids = array_merge( $ids, $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE '%wp:aas/slider%'" ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 	$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		"UPDATE {$wpdb->posts} SET post_content = REPLACE( post_content, '<!-- wp:aas/slider', '<!-- wp:wptn/slider' ) WHERE post_content LIKE '%wp:aas/slider%'"
 	);
 
-	wp_cache_flush();
+	foreach ( array_unique( array_map( 'intval', $ids ) ) as $id ) {
+		clean_post_cache( $id );
+	}
 	update_option( 'wptn_migrated', WPTN_VERSION );
 }
 register_activation_hook( __FILE__, 'wptn_migrate_legacy' );

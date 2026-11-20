@@ -25,6 +25,11 @@ Before / after photo comparison slider for WordPress: create unlimited compariso
 - No jQuery on the front end, no build step, assets loaded only where needed
 - English and French included, translation ready
 
+## Requirements
+
+- WordPress **7.0** or later (tested up to 7.1)
+- PHP **8.1** or later
+
 ## Installation
 
 1. Download the latest release zip (or **Code > Download ZIP** and rename the folder to `wp-then-now-slider`).
@@ -90,15 +95,24 @@ Deactivate and delete the old plugin, then install this one. On activation, comp
 
 ```text
 wp-then-now-slider/
-├── wp-then-now-slider.php   # plugin (post type, shortcode, block, admin)
+├── wp-then-now-slider.php   # plugin (settings schema, post type, shortcode, block, admin)
+├── uninstall.php            # removes settings and cache (comparisons are kept)
+├── block/block.json         # block metadata (API v3)
+├── includes/updater.php     # updates from GitHub Releases
 ├── assets/
 │   ├── css/style.css        # front end + editor
 │   ├── css/admin.css
-│   ├── js/slider.js         # front end slider (vanilla JS)
+│   ├── js/slider.js         # front end slider (vanilla JS, deferred)
 │   ├── js/block.js          # Gutenberg block (no build step)
-│   └── js/admin.js          # media picker, color pickers
-└── languages/               # .pot, fr_FR .po/.mo/.json
+│   └── js/admin.js          # media picker, color pickers, conditional fields
+├── languages/               # .pot, fr_FR .po/.mo/.json
+├── screenshots/             # README images (not in the zip)
+└── .github/workflows/       # attaches the zip to each Release (not in the zip)
 ```
+
+## Privacy
+
+The plugin contacts `api.github.com` (about every 6 hours, admin side only) to check for updates. No data about the site or its visitors is sent.
 
 ## License
 
@@ -116,5 +130,6 @@ Slider de comparaison de photos avant / après pour WordPress. Créez autant de 
 - Couleurs globales (**Avant / Après > Réglages**) ou propres à chaque comparaison
 - Couleur de sélection de la poignée = couleur du thème par défaut
 - Interface en français si WordPress est en français, sinon en anglais
+- Nécessite WordPress 7.0+ et PHP 8.1+
 - Mises à jour automatiques depuis les Releases GitHub (lien « Vérifier les mises à jour » sous le nom du plugin)
 - Les anciens shortcodes `[avant_apres]` et `[before_after]` fonctionnent toujours

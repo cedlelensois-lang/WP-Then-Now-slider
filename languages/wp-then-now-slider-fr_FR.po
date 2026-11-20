@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Then Now Slider 2.2.0\n"
+"Project-Id-Version: WP Then Now Slider 2.3.0\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -195,7 +195,7 @@ msgid "Watermark text"
 msgstr "Texte du filigrane"
 
 msgid "Used when no watermark image is set, e.g. © My studio."
-msgstr "Utilisé si aucune image de filigrane n’est choisie, ex. : © Mon studio."
+msgstr "Utilisé si aucune image de filigrane n’est choisie, ex. : © Mon studio."
 
 msgid "Watermark position"
 msgstr "Position du filigrane"
@@ -210,7 +210,7 @@ msgid "Badge text"
 msgstr "Texte du badge"
 
 msgid "E.g. New, -50%, 2024. Leave empty for no badge."
-msgstr "Ex. : Nouveau, -50 %, 2024. Laissez vide pour ne pas afficher de badge."
+msgstr "Ex. : Nouveau, -50 %, 2024. Laissez vide pour ne pas afficher de badge."
 
 msgid "Badge position"
 msgstr "Position du badge"
@@ -264,7 +264,7 @@ msgid "No comparisons found in Trash."
 msgstr "Aucune comparaison dans la corbeille."
 
 msgid "WP Then Now Slider: please set two images (before and after)."
-msgstr "WP Then Now Slider : veuillez définir deux images (avant et après)."
+msgstr "WP Then Now Slider : veuillez définir deux images (avant et après)."
 
 msgid "Click to switch between the two images"
 msgstr "Cliquez pour passer d’une image à l’autre"
@@ -280,7 +280,7 @@ msgstr "Quitter le plein écran"
 
 #, php-format
 msgid "WP Then Now Slider: comparison #%d not found."
-msgstr "WP Then Now Slider : la comparaison n°%d est introuvable."
+msgstr "WP Then Now Slider : la comparaison n°%d est introuvable."
 
 msgid "Images and settings"
 msgstr "Images et réglages"
@@ -311,7 +311,7 @@ msgid "Before / After > Settings"
 msgstr "Avant / Après > Réglages"
 
 msgid "Tip: use two images with the same dimensions for perfect alignment."
-msgstr "Astuce : utilisez deux images de mêmes dimensions pour un alignement parfait."
+msgstr "Astuce : utilisez deux images de mêmes dimensions pour un alignement parfait."
 
 msgid "Save the comparison to get its shortcode."
 msgstr "Enregistrez la comparaison pour obtenir son shortcode."
@@ -320,7 +320,7 @@ msgid "Copy"
 msgstr "Copier"
 
 msgid "Paste this shortcode into a page or post, or use the “Before / After” block."
-msgstr "Collez ce shortcode dans une page ou un article, ou utilisez le bloc « Avant / Après »."
+msgstr "Collez ce shortcode dans une page ou un article, ou utilisez le bloc « Avant / Après »."
 
 msgid "Choose both images, then save to see the preview."
 msgstr "Choisissez les deux images puis enregistrez pour voir l’aperçu."
@@ -329,7 +329,7 @@ msgid "Use this image"
 msgstr "Utiliser cette image"
 
 msgid "Copied!"
-msgstr "Copié !"
+msgstr "Copié !"
 
 msgid "Before / After settings"
 msgstr "Réglages Avant / Après"
@@ -338,7 +338,7 @@ msgid "Settings"
 msgstr "Réglages"
 
 msgid "These colors apply to every comparison set to “Global colors”."
-msgstr "Ces couleurs s’appliquent à toutes les comparaisons réglées sur « Couleurs globales »."
+msgstr "Ces couleurs s’appliquent à toutes les comparaisons réglées sur « Couleurs globales »."
 
 msgid "Handle color when selected or being dragged. Leave empty to use the theme color."
 msgstr "Couleur de la poignée sélectionnée ou en cours de glissement. Laissez vide pour utiliser la couleur du thème."
@@ -354,14 +354,14 @@ msgstr "Vérifier les mises à jour"
 
 #, php-format
 msgid "WP Then Now Slider: version %s is available. Use the “Update now” link below."
-msgstr "WP Then Now Slider : la version %s est disponible. Utilisez le lien « Mettre à jour » ci-dessous."
+msgstr "WP Then Now Slider : la version %s est disponible. Utilisez le lien « Mettre à jour » ci-dessous."
 
 #, php-format
 msgid "WP Then Now Slider: you are using the latest version (%s)."
-msgstr "WP Then Now Slider : vous utilisez la dernière version (%s)."
+msgstr "WP Then Now Slider : vous utilisez la dernière version (%s)."
 
 msgid "WP Then Now Slider: unable to reach GitHub right now. Please try again later."
-msgstr "WP Then Now Slider : impossible de joindre GitHub pour le moment. Réessayez plus tard."
+msgstr "WP Then Now Slider : impossible de joindre GitHub pour le moment. Réessayez plus tard."
 
 msgid "Replace"
 msgstr "Remplacer"
@@ -375,11 +375,8 @@ msgstr "— Images personnalisées —"
 msgid "Saved comparison"
 msgstr "Comparaison enregistrée"
 
-msgid "Loading…"
-msgstr "Chargement…"
-
 msgid "Manage your comparisons in the “Before / After” admin menu."
-msgstr "Gérez vos comparaisons dans le menu « Avant / Après » de l’admin."
+msgstr "Gérez vos comparaisons dans le menu « Avant / Après » de l’admin."
 
 msgid "Edit this comparison"
 msgstr "Modifier cette comparaison"
@@ -392,4 +389,12 @@ msgstr "Choisissez une comparaison enregistrée, ou deux images."
 
 msgid "WP Then Now Slider"
 msgstr "WP Then Now Slider"
+
+msgctxt "block title"
+msgid "Before / After"
+msgstr "Avant / Après"
+
+msgctxt "block description"
+msgid "Display a before / after photo comparison."
+msgstr "Affichez une comparaison de photos avant / après."
 

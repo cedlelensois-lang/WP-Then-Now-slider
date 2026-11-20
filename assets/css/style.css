@@ -453,3 +453,12 @@ html.wptn-fs-lock body { overflow: hidden; }
 	height: auto;
 	margin-bottom: 6px;
 }
+
+/* ---------- Animations réduites (préférence système) ---------- */
+@media (prefers-reduced-motion: reduce) {
+	.wptn *,
+	.wptn *::before,
+	.wptn *::after {
+		transition: none !important;
+	}
+}

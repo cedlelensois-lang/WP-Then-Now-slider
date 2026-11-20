@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Then Now Slider 2.2.0\n"
+"Project-Id-Version: WP Then Now Slider 2.3.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "X-Domain: wp-then-now-slider\n"
 
@@ -371,9 +371,6 @@ msgstr ""
 msgid "Saved comparison"
 msgstr ""
 
-msgid "Loading…"
-msgstr ""
-
 msgid "Manage your comparisons in the “Before / After” admin menu."
 msgstr ""
 
@@ -387,5 +384,13 @@ msgid "Choose a saved comparison, or two images."
 msgstr ""
 
 msgid "WP Then Now Slider"
+msgstr ""
+
+msgctxt "block title"
+msgid "Before / After"
+msgstr ""
+
+msgctxt "block description"
+msgid "Display a before / after photo comparison."
 msgstr ""
 

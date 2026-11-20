@@ -30,7 +30,7 @@ function wptn_github_release( $force = false ) {
 	$key = 'wptn_github_release';
 
 	// « Tableau de bord > Mises à jour > Vérifier à nouveau » vide aussi notre cache.
-	if ( is_admin() && isset( $_GET['force-check'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+	if ( is_admin() && isset( $_GET['force-check'] ) && current_user_can( 'update_plugins' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		$force = true;
 	}
 
@@ -45,7 +45,7 @@ function wptn_github_release( $force = false ) {
 		'timeout' => 10,
 		'headers' => array(
 			'Accept'     => 'application/vnd.github+json',
-			'User-Agent' => 'WP-Then-Now-Slider/' . WPTN_VERSION . '; ' . home_url( '/' ),
+			'User-Agent' => 'WP-Then-Now-Slider/' . WPTN_VERSION, // Aucune donnée du site n'est envoyée.
 		),
 	);
 	if ( defined( 'WPTN_GITHUB_TOKEN' ) && WPTN_GITHUB_TOKEN ) {
@@ -60,10 +60,14 @@ function wptn_github_release( $force = false ) {
 	}
 
 	$data    = json_decode( wp_remote_retrieve_body( $response ), true );
+	$data    = is_array( $data ) ? $data : array();
 	$package = '';
+	// Le zip doit venir des Releases de ce dépôt, en HTTPS.
+	$expected = 'https://github.com/' . WPTN_REPO . '/releases/download/';
 	if ( ! empty( $data['assets'] ) && is_array( $data['assets'] ) ) {
 		foreach ( $data['assets'] as $asset ) {
-			if ( isset( $asset['name'], $asset['browser_download_url'] ) && WPTN_ASSET === $asset['name'] ) {
+			if ( isset( $asset['name'], $asset['browser_download_url'] ) && WPTN_ASSET === $asset['name']
+				&& 0 === strpos( (string) $asset['browser_download_url'], $expected ) ) {
 				$package = $asset['browser_download_url'];
 				break;
 			}
@@ -71,13 +75,14 @@ function wptn_github_release( $force = false ) {
 	}
 
 	// Release sans zip (workflow pas encore terminé) : on réessaiera dans 1 h.
-	if ( empty( $data['tag_name'] ) || ! $package ) {
+	$version = isset( $data['tag_name'] ) ? ltrim( (string) $data['tag_name'], 'vV' ) : '';
+	if ( ! preg_match( '/^\d+(\.\d+){0,3}$/', $version ) || ! $package ) {
 		set_site_transient( $key, 0, HOUR_IN_SECONDS );
 		return null;
 	}
 
 	$release = array(
-		'version' => ltrim( $data['tag_name'], 'vV' ),
+		'version' => $version,
 		'package' => $package,
 		'url'     => isset( $data['html_url'] ) ? $data['html_url'] : 'https://github.com/' . WPTN_REPO,
 		'body'    => isset( $data['body'] ) ? (string) $data['body'] : '',
@@ -108,8 +113,8 @@ function wptn_update_check( $update, $plugin_data, $plugin_file ) {
 		'version'      => $release['version'],
 		'url'          => $release['url'],
 		'package'      => $release['package'],
-		'requires'     => '5.8',
-		'requires_php' => '7.2',
+		'requires'     => '7.0',
+		'requires_php' => '8.1',
 	);
 }
 add_filter( 'update_plugins_github.com', 'wptn_update_check', 10, 3 );
@@ -139,8 +144,8 @@ function wptn_plugin_info( $result, $action, $args ) {
 		'version'       => $release['version'],
 		'author'        => '<a href="https://github.com/cedlelensois-lang">Cédric</a>',
 		'homepage'      => $repo_url,
-		'requires'      => '5.8',
-		'requires_php'  => '7.2',
+		'requires'      => '7.0',
+		'requires_php'  => '8.1',
 		'last_updated'  => $release['date'],
 		'download_link' => $release['package'],
 		'sections'      => array(
@@ -242,17 +247,21 @@ add_action( 'admin_init', 'wptn_handle_check_update' );
  * Message affiché après la vérification.
  */
 function wptn_update_notice() {
-	if ( empty( $_GET['wptn-update-status'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+	if ( empty( $_GET['wptn-update-status'] ) || ! current_user_can( 'update_plugins' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		return;
 	}
-	$status  = sanitize_key( $_GET['wptn-update-status'] ); // phpcs:ignore WordPress.Security.NonceVerification
+	$screen = get_current_screen();
+	if ( ! $screen || 'plugins' !== $screen->id ) {
+		return;
+	}
+	$status  = sanitize_key( wp_unslash( $_GET['wptn-update-status'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 	$release = wptn_github_release();
 	if ( 'available' === $status && $release ) {
-		/* translators: %s: numéro de version */
+		/* translators: %s: version number */
 		$msg  = sprintf( __( 'WP Then Now Slider: version %s is available. Use the “Update now” link below.', 'wp-then-now-slider' ), $release['version'] );
 		$type = 'warning';
 	} elseif ( 'latest' === $status ) {
-		/* translators: %s: numéro de version */
+		/* translators: %s: version number */
 		$msg  = sprintf( __( 'WP Then Now Slider: you are using the latest version (%s).', 'wp-then-now-slider' ), WPTN_VERSION );
 		$type = 'success';
 	} else {

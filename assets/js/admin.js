@@ -71,6 +71,14 @@ jQuery(function ($) {
 	$(document).on('change', '[name^="wptn["]', refresh);
 	refresh();
 
+	// Curseurs : affiche la valeur ; champs shortcode : sélection au clic
+	$(document).on('input', '.wptn-range', function () {
+		$(this).next('output').text(this.value);
+	});
+	$(document).on('click focus', '.wptn-shortcode-input', function () {
+		this.select();
+	});
+
 	// Bouton copier
 	$(document).on('click', '.wptn-copy', function () {
 		var $btn = $(this);

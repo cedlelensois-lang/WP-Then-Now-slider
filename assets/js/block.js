@@ -8,7 +8,10 @@
 	var c = wp.components;
 	var useSelect = wp.data.useSelect;
 	var ServerSideRender = wp.serverSideRender;
-	var D = window.wptnBlock || { schema: {}, sections: {}, settingsUrl: '' };
+	var D = window.wptnBlock || { schema: {}, sections: {}, comparisons: [], editUrl: '', settingsUrl: '' };
+	// Taille et marges modernes des composants (WordPress 6.7+).
+	var MODERN = { __next40pxDefaultSize: true, __nextHasNoMarginBottom: true };
+	function props(o) { return Object.assign({}, MODERN, o); }
 	var KEYS = Object.keys(D.schema);
 
 	/* ---------- Champ image ---------- */
@@ -20,7 +23,7 @@
 			? media.media_details.sizes.thumbnail.source_url
 			: media.source_url);
 
-		return el(c.BaseControl, { label: props.label, help: props.help, className: 'wptn-block-media' },
+		return el(c.BaseControl, { __nextHasNoMarginBottom: true, label: props.label, help: props.help, className: 'wptn-block-media' },
 			thumb ? el('img', { src: thumb, alt: '' }) : null,
 			el('div', { style: { display: 'flex', gap: '8px', flexWrap: 'wrap' } },
 				el(be.MediaUploadCheck, null,
@@ -50,19 +53,19 @@
 			case 'media':
 				return el(MediaField, { label: f.label, help: f.help, value: v, onChange: set });
 			case 'text':
-				return el(c.TextControl, { label: f.label, help: f.help, value: v || '', onChange: set });
+				return el(c.TextControl, props({ label: f.label, help: f.help, value: v || '', onChange: set }));
 			case 'textarea':
-				return el(c.TextareaControl, { label: f.label, help: f.help, value: v || '', onChange: set });
+				return el(c.TextareaControl, { __nextHasNoMarginBottom: true, label: f.label, help: f.help, value: v || '', onChange: set });
 			case 'bool':
-				return el(c.ToggleControl, { label: f.label, help: f.help, checked: !!v, onChange: set });
+				return el(c.ToggleControl, { __nextHasNoMarginBottom: true, label: f.label, help: f.help, checked: !!v, onChange: set });
 			case 'select':
-				return el(c.SelectControl, { label: f.label, help: f.help, value: v, options: options, onChange: set });
+				return el(c.SelectControl, props({ label: f.label, help: f.help, value: v, options: options, onChange: set }));
 			case 'radio':
 				return el(c.RadioControl, { label: f.label, help: f.help, selected: v, options: options, onChange: set });
 			case 'range':
-				return el(c.RangeControl, { label: f.label, help: f.help, value: v, min: f.min, max: f.max, onChange: set });
+				return el(c.RangeControl, props({ label: f.label, help: f.help, value: v, min: f.min, max: f.max, onChange: set }));
 			case 'color':
-				return el(c.BaseControl, { label: f.label, help: f.help },
+				return el(c.BaseControl, { __nextHasNoMarginBottom: true, label: f.label, help: f.help },
 					el(c.ColorPalette, { value: v || undefined, clearable: true, onChange: function (x) { set(x || ''); } })
 				);
 		}
@@ -83,7 +86,7 @@
 	}
 
 	wp.blocks.registerBlockType('wptn/slider', {
-		apiVersion: 2,
+		apiVersion: 3,
 		title: __('Before / After', 'wp-then-now-slider'),
 		description: __('Display a before / after photo comparison.', 'wp-then-now-slider'),
 		icon: 'image-flip-horizontal',
@@ -117,26 +120,24 @@
 				}
 			}, []);
 
-			// Comparaisons enregistrées
-			var comparisons = useSelect(function (select) {
-				return select('core').getEntityRecords('postType', 'wptn_comparison', { per_page: -1, status: 'publish,draft,private', orderby: 'title', order: 'asc' });
-			}, []);
+			// Comparaisons enregistrées (transmises par PHP, l'API REST n'expose plus ce type de contenu)
+			var comparisons = D.comparisons || [];
 			var options = [{ label: __('— Custom images —', 'wp-then-now-slider'), value: 0 }];
-			(comparisons || []).forEach(function (p) {
-				options.push({ label: (p.title && p.title.rendered) || ('#' + p.id), value: p.id });
+			comparisons.forEach(function (p) {
+				options.push({ label: p.title, value: p.id });
 			});
-			var pickComparison = el(c.SelectControl, {
+			var pickComparison = el(c.SelectControl, props({
 				label: __('Saved comparison', 'wp-then-now-slider'),
 				value: a.comparisonId,
 				options: options,
 				onChange: function (v) { set({ comparisonId: parseInt(v, 10) || 0 }); },
-				help: comparisons === null ? __('Loading…', 'wp-then-now-slider') : __('Manage your comparisons in the “Before / After” admin menu.', 'wp-then-now-slider')
-			});
+				help: __('Manage your comparisons in the “Before / After” admin menu.', 'wp-then-now-slider')
+			}));
 
 			var panels = [
 				el(c.PanelBody, { key: 'source', title: __('Comparison', 'wp-then-now-slider') },
 					pickComparison,
-					a.comparisonId ? el(c.ExternalLink, { href: 'post.php?post=' + a.comparisonId + '&action=edit' }, __('Edit this comparison', 'wp-then-now-slider')) : null
+					a.comparisonId ? el(c.ExternalLink, { href: D.editUrl + a.comparisonId }, __('Edit this comparison', 'wp-then-now-slider')) : null
 				)
 			];
 
@@ -172,7 +173,7 @@
 					instructions: __('Choose a saved comparison, or two images.', 'wp-then-now-slider')
 				},
 					el('div', { style: { width: '100%' } },
-						(comparisons && comparisons.length) ? pickComparison : null,
+						comparisons.length ? pickComparison : null,
 						el('div', { className: 'wptn-placeholder-row' },
 							el(Field, { field: D.schema.before, value: a.before, onChange: function (v) { set({ before: v }); } }),
 							el(Field, { field: D.schema.after, value: a.after, onChange: function (v) { set({ after: v }); } })
