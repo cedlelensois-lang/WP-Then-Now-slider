@@ -108,6 +108,76 @@
 			if (!frame) frame = requestAnimationFrame(render);
 		}
 
+		/* ---------- Animation d'introduction ---------- */
+		var intro = fig.dataset.intro;
+		var introFrame = null;
+
+		function stopIntro() {
+			if (introFrame) {
+				cancelAnimationFrame(introFrame);
+				introFrame = null;
+			}
+			intro = null;
+		}
+
+		function ease(t) {
+			return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+		}
+
+		function playIntro() {
+			if (!intro || dragging) return;
+			var start = pos;
+			var amp = 25;
+			var keys = [start, Math.min(start + amp, 92), Math.max(start - amp, 8), start];
+			var total = (parseFloat(fig.dataset.introDuration) || 2) * 1000;
+			var seg = total / (keys.length - 1);
+			var t0 = null;
+			fig.classList.add('wptn-intro-playing');
+
+			function step(now) {
+				if (t0 === null) t0 = now;
+				var elapsed = now - t0;
+				var i = Math.min(Math.floor(elapsed / seg), keys.length - 2);
+				var t = Math.min((elapsed - i * seg) / seg, 1);
+				pos = keys[i] + (keys[i + 1] - keys[i]) * ease(t);
+				render();
+				if (elapsed < total) {
+					introFrame = requestAnimationFrame(step);
+				} else {
+					pos = start;
+					render();
+					introFrame = null;
+					fig.classList.remove('wptn-intro-playing');
+				}
+			}
+			introFrame = requestAnimationFrame(step);
+		}
+
+		function setupIntro() {
+			if (!intro) return;
+			var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (reduce) {
+				intro = null;
+				return;
+			}
+			var delayed = function () { setTimeout(playIntro, 400); };
+			if (intro === 'visible' && 'IntersectionObserver' in window) {
+				var io = new IntersectionObserver(function (entries) {
+					entries.forEach(function (entry) {
+						if (entry.isIntersecting) {
+							io.disconnect();
+							delayed();
+						}
+					});
+				}, { threshold: 0.6 });
+				io.observe(el);
+			} else if (document.readyState === 'complete') {
+				delayed();
+			} else {
+				window.addEventListener('load', delayed, { once: true });
+			}
+		}
+
 		function posFromEvent(e) {
 			var r = el.getBoundingClientRect();
 			return vertical
@@ -118,6 +188,8 @@
 		el.addEventListener('pointerdown', function (e) {
 			if (e.button !== undefined && e.button !== 0) return;
 			if (e.target.closest('.wptn-fs-btn, a')) return;
+			stopIntro();
+			fig.classList.remove('wptn-intro-playing');
 			dragging = true;
 			el.classList.add('is-dragging');
 			try { el.setPointerCapture(e.pointerId); } catch (err) {}
@@ -127,6 +199,10 @@
 
 		el.addEventListener('pointermove', function (e) {
 			if (dragging || (hoverMode && e.pointerType === 'mouse')) {
+				if (introFrame) {
+					stopIntro();
+					fig.classList.remove('wptn-intro-playing');
+				}
 				setPos(posFromEvent(e));
 			}
 		});
@@ -143,6 +219,10 @@
 		if (knob) {
 			knob.addEventListener('keydown', function (e) {
 				var step = e.shiftKey ? 10 : 1;
+				if (introFrame) {
+					stopIntro();
+					fig.classList.remove('wptn-intro-playing');
+				}
 				switch (e.key) {
 					case 'ArrowLeft':
 					case 'ArrowUp':
@@ -166,6 +246,7 @@
 		}
 
 		render();
+		setupIntro();
 	}
 
 	function initSlider(fig) {

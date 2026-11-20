@@ -18,6 +18,7 @@ Before / after photo comparison slider for WordPress: create unlimited compariso
 - **Handle:** 4 styles (circle, square, arrows, line), always visible / on hover / hidden
 - **Filters:** black & white, sepia, vintage, warm, cool, high contrast, vivid colors, blur
 - **Watermark** (image or text), **badge**, **detailed caption** (below or over the image)
+- **Intro animation**: the handle sweeps once on page load or when the slider scrolls into view (respects reduced motion)
 - **Fullscreen** button (native, simulated on iPhone)
 - Labels that fade out when the handle passes over them
 - Global or per-comparison colors — handle color and selection color (defaults to the theme color)
@@ -57,6 +58,8 @@ Before / after photo comparison slider for WordPress: create unlimited compariso
 | `start` | 0–100 | `50` |
 | `handle_style` | `circle`, `square`, `arrows`, `line` | `circle` |
 | `handle_visibility` | `always`, `hover`, `hidden` | `always` |
+| `intro` | `none`, `load`, `visible` | `none` |
+| `intro_duration` | 1–5 (seconds) | `2` |
 | `fullscreen` | `yes`, `no` | `no` |
 | `color` | hex color | global setting |
 | `focus_color` | hex color | global setting / theme |
@@ -127,6 +130,7 @@ Slider de comparaison de photos avant / après pour WordPress. Créez autant de 
 - Dispositions : horizontale, verticale, ordre inversé ; modes glisser, survol, clic pour basculer, côte à côte
 - Poignée : 4 styles, visible / au survol / masquée
 - Filtres d'image, filigrane (image ou texte), badge, légende détaillée, bouton plein écran
+- Animation d'introduction : la poignée fait un aller-retour au chargement ou à l'apparition à l'écran
 - Couleurs globales (**Avant / Après > Réglages**) ou propres à chaque comparaison
 - Couleur de sélection de la poignée = couleur du thème par défaut
 - Interface en français si WordPress est en français, sinon en anglais

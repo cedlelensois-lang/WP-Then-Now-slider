@@ -462,3 +462,8 @@ html.wptn-fs-lock body { overflow: hidden; }
 		transition: none !important;
 	}
 }
+
+/* Animation d'introduction : la poignée reste visible pendant le balayage */
+.wptn-intro-playing .wptn-handle {
+	opacity: 1;
+}

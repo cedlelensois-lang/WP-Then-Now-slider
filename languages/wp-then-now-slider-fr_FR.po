@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Then Now Slider 2.3.0\n"
+"Project-Id-Version: WP Then Now Slider 2.4.0\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,6 +157,21 @@ msgstr "Masquée"
 
 msgid "When hidden, visitors can still drag anywhere on the image."
 msgstr "Masquée, la comparaison reste utilisable en glissant n’importe où sur l’image."
+
+msgid "Intro animation"
+msgstr "Animation d’introduction"
+
+msgid "On page load"
+msgstr "Au chargement de la page"
+
+msgid "When visible on screen"
+msgstr "Quand elle apparaît à l’écran"
+
+msgid "The handle sweeps once to show visitors they can drag it. Skipped for visitors who prefer reduced motion."
+msgstr "La poignée fait un aller-retour pour montrer qu’on peut la faire glisser. Désactivée pour les visiteurs qui préfèrent réduire les animations."
+
+msgid "Animation duration (seconds)"
+msgstr "Durée de l’animation (secondes)"
 
 msgid "Fullscreen button"
 msgstr "Bouton plein écran"

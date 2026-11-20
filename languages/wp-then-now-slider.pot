@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Then Now Slider 2.3.0\n"
+"Project-Id-Version: WP Then Now Slider 2.4.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "X-Domain: wp-then-now-slider\n"
 
@@ -152,6 +152,21 @@ msgid "Hidden"
 msgstr ""
 
 msgid "When hidden, visitors can still drag anywhere on the image."
+msgstr ""
+
+msgid "Intro animation"
+msgstr ""
+
+msgid "On page load"
+msgstr ""
+
+msgid "When visible on screen"
+msgstr ""
+
+msgid "The handle sweeps once to show visitors they can drag it. Skipped for visitors who prefer reduced motion."
+msgstr ""
+
+msgid "Animation duration (seconds)"
 msgstr ""
 
 msgid "Fullscreen button"

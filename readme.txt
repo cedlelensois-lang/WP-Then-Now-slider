@@ -3,7 +3,7 @@ Tags: before after, image comparison, slider, compare images, photo
 Requires at least: 7.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2.3.0
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,7 @@ shortcode or the Gutenberg block.
 * Handle styles (circle, square, arrows, line) and visibility (always, on hover, hidden)
 * Image filters: black & white, sepia, vintage, warm, cool, high contrast, vivid, blur
 * Watermark (image or text), custom badge, detailed caption (below or over the image)
+* Intro animation: the handle sweeps once on page load or when the slider scrolls into view
 * Fullscreen button (native fullscreen, simulated on iPhone)
 * Custom labels that fade out when the handle passes over them
 * Global or per-comparison colors (handle + selection color; default = theme color)
@@ -55,7 +56,7 @@ Attributes (with id they override the saved settings):
 * Images: before, after (media ID or URL), before_label, after_label, labels (yes|no), before_alt, after_alt
 * Layout: mode (slider|hover|click|side), orientation (horizontal|vertical), reverse (yes|no),
   start (0-100), handle_style (circle|square|arrows|line), handle_visibility (always|hover|hidden),
-  fullscreen (yes|no)
+  intro (none|load|visible), intro_duration (1-5 seconds), fullscreen (yes|no)
 * Colors: color, focus_color
 * Filters: before_filter, after_filter (none|grayscale|sepia|vintage|warm|cool|contrast|saturate|blur)
 * Watermark: watermark_image (media ID), watermark_text, watermark_position
@@ -66,6 +67,7 @@ Attributes (with id they override the saved settings):
 
 Example:
 [then_now id="12" mode="click" before_filter="grayscale" badge_text="2024" fullscreen="yes"]
+[then_now id="12" intro="visible" intro_duration="3"]
 
 Legacy names [avant_apres] and [before_after] still work when no other plugin uses them.
 
@@ -111,6 +113,10 @@ GitHub privacy statement: https://docs.github.com/site-policy/privacy-policies/g
 Requires WordPress 7.0 and PHP 8.1. Security hardening and WordPress 7.1 compatibility (block API v3).
 
 == Changelog ==
+
+= 2.4.0 =
+* Intro animation: the handle sweeps once on page load or when the slider becomes visible (duration 1-5 s).
+* Stops as soon as the visitor interacts; skipped when reduced motion is preferred.
 
 = 2.3.0 =
 * Requires WordPress 7.0+ and PHP 8.1+; tested up to WordPress 7.1.

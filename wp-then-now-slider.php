@@ -3,7 +3,7 @@
  * Plugin Name:       WP Then Now Slider
  * Plugin URI:        https://github.com/cedlelensois-lang/WP-Then-Now-slider
  * Description:       Create and manage multiple before / after photo comparisons with a draggable slider. Includes the [then_now id="X"] shortcode and a Gutenberg block.
- * Version:           2.3.0
+ * Version:           2.4.0
  * Requires at least: 7.0
  * Requires PHP:      8.1
  * Author:            Cédric
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPTN_VERSION', '2.3.0' );
+define( 'WPTN_VERSION', '2.4.0' );
 define( 'WPTN_FILE', __FILE__ );
 define( 'WPTN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPTN_CPT', 'wptn_comparison' );
@@ -132,6 +132,19 @@ function wptn_schema() {
 			),
 			'help'    => __( 'When hidden, visitors can still drag anywhere on the image.', 'wp-then-now-slider' ),
 		) + $slider_modes,
+		'intro'              => array(
+			'type'    => 'select',
+			'default' => 'none',
+			'section' => 'layout',
+			'label'   => __( 'Intro animation', 'wp-then-now-slider' ),
+			'options' => array(
+				'none'    => __( 'None', 'wp-then-now-slider' ),
+				'load'    => __( 'On page load', 'wp-then-now-slider' ),
+				'visible' => __( 'When visible on screen', 'wp-then-now-slider' ),
+			),
+			'help'    => __( 'The handle sweeps once to show visitors they can drag it. Skipped for visitors who prefer reduced motion.', 'wp-then-now-slider' ),
+		) + $slider_modes,
+		'intro_duration'     => array( 'type' => 'range', 'default' => 2, 'min' => 1, 'max' => 5, 'section' => 'layout', 'label' => __( 'Animation duration (seconds)', 'wp-then-now-slider' ), 'show_if' => array( 'intro' => array( 'load', 'visible' ), 'mode' => array( 'slider', 'hover' ) ) ),
 		'fullscreen'         => array( 'type' => 'bool', 'default' => false, 'section' => 'layout', 'label' => __( 'Fullscreen button', 'wp-then-now-slider' ) ),
 
 		/* Couleurs */
@@ -571,6 +584,10 @@ function wptn_render( $args ) {
 	<figure class="<?php echo esc_attr( trim( implode( ' ', array_filter( $classes ) ) ) ); ?>"
 		data-mode="<?php echo esc_attr( $mode ); ?>"
 		data-orientation="<?php echo esc_attr( $orientation ); ?>"
+		<?php if ( $is_slider && 'none' !== $s['intro'] ) : ?>
+		data-intro="<?php echo esc_attr( $s['intro'] ); ?>"
+		data-intro-duration="<?php echo esc_attr( $s['intro_duration'] ); ?>"
+		<?php endif; ?>
 		style="<?php echo esc_attr( $style ); ?>">
 		<div class="wptn-slider"<?php echo $slider_attrs; // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 			<?php
